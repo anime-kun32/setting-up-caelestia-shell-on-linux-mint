@@ -90,17 +90,29 @@ Sign in with your Qt account and continue.
 
 ## Qt Installer Setup
 
-When asked for the installation type select:
+**Step 1: Select Installation Type**
+When asked for the installation type, select:
 
 ```
 Custom installation
 ```
 
+![Qt Installer Step 4 - Custom Installation](guide-4.png)
+
+*Screenshot: Selecting "Custom installation" during Qt setup.*
+
+---
+
+**Step 2: Select Qt for Development**
 Expand:
 
 ```
 Qt for development
 ```
+
+![Qt Installer Step 5 - Qt for Development](guide-5.png)
+
+*Screenshot: Expanding "Qt for development" section.*
 
 Then expand:
 
@@ -108,6 +120,9 @@ Then expand:
 Qt
 ```
 
+---
+
+**Step 3: Choose Qt Version**
 Expand:
 
 ```
@@ -122,6 +137,13 @@ Desktop
 
 Only select the desktop component. Do not select unnecessary platforms.
 
+![Qt Installer Step 6 - Select Desktop](guide-6.png)
+
+*Screenshot: Selecting "Desktop" under Qt 6.11.1.*
+
+---
+
+**Step 4: Add Qt Wayland**
 Expand:
 
 ```
@@ -129,6 +151,10 @@ Additional libraries
 ```
 
 under Qt 6.11.1.
+
+![Qt Installer Step 7 - Additional Libraries](guide-7.png)
+
+*Screenshot: Expanding "Additional libraries" section.*
 
 Scroll down until you find:
 
@@ -144,6 +170,13 @@ Qt Wayland
 
 This is required for Wayland applications.
 
+![Qt Installer Step 8 - Qt Wayland](guide-8.png)
+
+*Screenshot: Selecting "Qt Wayland" from Additional libraries.*
+
+---
+
+**Step 5: Skip Build Tools**
 Do not install:
 
 ```
@@ -152,11 +185,26 @@ Build Tools
 
 They are not required. We will use GCC, CMake, and Ninja from the system.
 
+---
+
+**Step 6: Accept License**
 Accept the Qt license agreement.
 
-Before installing, make sure your selected components include:
+![Qt Installer Step 9 - License Agreement](guide-9.png)
+
+*Screenshot: Accepting the Qt license agreement.*
+
+---
+
+**Step 7: Verify Selection**
+Before installing, make sure your selected components look like this:
+
 - Qt 6.11.1 → Desktop
 - Qt 6.11.1 → Additional Libraries → Qt Wayland
+
+![Qt Installer Step 10 - Final Selection](guide-10.png)
+
+*Screenshot: Final component selection before installation.*
 
 Continue the installation.
 
