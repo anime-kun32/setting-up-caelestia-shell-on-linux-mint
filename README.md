@@ -75,7 +75,7 @@ You need a Qt account to download the official installer.
 
 Go to:
 
-https://www.qt.io/download
+https://www.qt.io/development/download-qt-installer-oss
 
 Download the Linux installer.
 
