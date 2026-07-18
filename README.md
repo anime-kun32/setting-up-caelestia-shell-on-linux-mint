@@ -3,10 +3,10 @@
 A guide for installing **Caelestia Shell** on Ubuntu-based distributions such as Ubuntu and Linux Mint.
 
 
-## Preview 
+# Preview 
 
-(preview-1.png)
-(preview-2.png
+![preview](preview-1.png)
+![preview](preview-2.png
 
 
 This guide focuses on a manual installation using:
