@@ -178,6 +178,7 @@ Before installing, make sure your selected components look like this:
 ![Qt Installer Step 10](guide-10.png)
 
 Continue the installation.
+Note if you did try to unselect build tools expand it and unselect cmake and ninja 
 
 ---
 
