@@ -1,12 +1,13 @@
-# Caelestia Shell Installation Guide (Ubuntu / Linux Mint)
+# Caelestia Shell on Ubuntu / Linux Mint
 
-A guide for installing **Caelestia Shell** on Ubuntu-based distributions such as Ubuntu and Linux Mint.
+A guide for installing **Caelestia Shell** on Ubuntu-based distributions (Ubuntu, Linux Mint, etc).
 
-This guide focuses on a manual installation using:
+This guide installs:
+
+- Hyprland
 - Qt 6.11.1
 - Quickshell
 - Caelestia Shell
-- Hyprland
 
 ---
 
@@ -23,7 +24,7 @@ Before starting, make sure you have:
 
 Software requirements:
 
-- Linux Mint / Ubuntu based system
+- Ubuntu / Linux Mint based system
 - Hyprland
 - Qt 6.11.1
 - Quickshell
@@ -35,15 +36,16 @@ Software requirements:
 
 # 1. Install Hyprland
 
-Caelestia Shell runs on top of Hyprland.
+Caelestia Shell is designed to run on top of Hyprland.
 
 If you do not already have Hyprland installed, follow:
 
 https://github.com/LinuxBeginnings/Ubuntu-Hyprland
 
-Make sure Hyprland launches correctly before continuing.
+Make sure Hyprland starts correctly before continuing.
 
-Caelestia is only the desktop shell. It is not a window manager.
+Caelestia is only a desktop shell.
+It is not a window manager.
 
 ---
 
@@ -67,13 +69,13 @@ chmod +x qt-online-installer-linux-x64-*.run
 ./qt-online-installer-linux-x64-*.run
 ```
 
-Sign in with your Qt account and continue.
+Sign into your Qt account and continue.
 
 ---
 
 ## Qt Installer Setup
 
-When asked for the installation type select:
+Select:
 
 ```
 Custom installation
@@ -105,15 +107,13 @@ Expand:
 Qt 6.11.1
 ```
 
-Inside Qt 6.11.1 select:
+Select only:
 
 ```
 Desktop
 ```
 
-Only select the desktop component.
-
-Do not select unnecessary platforms.
+Do not select extra platforms.
 
 ![Qt Installer Step 6](guide-6.png)
 
@@ -131,13 +131,13 @@ under Qt 6.11.1.
 
 ---
 
-Scroll down until you find:
+Scroll down and find:
 
 ```
 Qt Wayland
 ```
 
-Select:
+Enable:
 
 ```
 Qt Wayland
@@ -167,24 +167,23 @@ from the system.
 
 ---
 
-Accept the Qt license agreement.
+Accept the license agreement.
 
 ![Qt Installer Step 9](guide-9.png)
 
 ---
 
-Before installing, make sure your selected components look like this:
+Before installing, check that your selection looks like this:
 
 ![Qt Installer Step 10](guide-10.png)
 
-Continue the installation.
-Note if you did try to unselect build tools expand it and unselect cmake and ninja 
+Continue with installation.
 
 ---
 
-# 3. Install System Dependencies
+# 3. Install Build Tools
 
-Install required tools:
+Install the required build packages:
 
 ```bash
 sudo apt update
@@ -193,20 +192,16 @@ sudo apt install \
 git \
 cmake \
 ninja-build \
-build-essential \
-qt6-base-dev \
-qt6-declarative-dev \
-qt6-wayland \
-libwayland-dev
+build-essential
 ```
 
 ---
 
 # 4. Install Quickshell
 
-## Recommended method
+Quickshell is required by Caelestia.
 
-Quickshell is available from the DankLinux repository.
+The easiest method on Ubuntu/Linux Mint is using the DankLinux packages.
 
 Add the repository:
 
@@ -216,13 +211,13 @@ sudo add-apt-repository ppa:avengemedia/danklinux
 sudo apt update
 ```
 
-Install the stable version:
+Install the stable release:
 
 ```bash
 sudo apt install quickshell
 ```
 
-or install the latest git version:
+or install the git version:
 
 ```bash
 sudo apt install quickshell-git
@@ -230,31 +225,46 @@ sudo apt install quickshell-git
 
 ---
 
-# 5. Install Caelestia Dependencies
+# 5. Install Caelestia Runtime Dependencies
 
-Install required libraries:
+Install optional features used by Caelestia:
 
 ```bash
 sudo apt install \
 ddcutil \
 brightnessctl \
-libcava-dev \
 network-manager \
 lm-sensors \
 fish \
-aubio-tools \
 libpipewire-0.3-dev \
 libqalculate-dev \
 swappy
 ```
 
+These provide:
+
+| Package | Feature |
+|-|-|
+| ddcutil | Monitor brightness control |
+| brightnessctl | Laptop brightness |
+| network-manager | Network widget |
+| lm-sensors | Hardware monitoring |
+| fish | Shell utilities |
+| PipeWire | Audio visualiser |
+| libqalculate | Calculator |
+| swappy | Screenshot editing |
+
 ---
 
-# 6. cpptrace
+# 6. cpptrace (Optional)
 
 Caelestia can use cpptrace for debugging.
 
-Install cpptrace:
+Most users can skip this.
+
+Only install it if CMake complains about missing cpptrace.
+
+Build cpptrace:
 
 ```bash
 git clone https://github.com/jeremy-rifkin/cpptrace.git
@@ -276,37 +286,9 @@ cd ..
 
 ---
 
-## Skipping cpptrace
-
-If you do not want cpptrace, you can try building without it.
-
-Clone Caelestia:
-
-```bash
-git clone https://github.com/caelestia-dots/shell.git
-
-cd shell
-```
-
-Configure:
-
-```bash
-cmake -B build \
--G Ninja \
--DCMAKE_BUILD_TYPE=Release
-```
-
-Build:
-
-```bash
-cmake --build build
-```
-
----
-
 # 7. Install Caelestia Shell
 
-Create the Quickshell directory:
+Create the Quickshell folder:
 
 ```bash
 mkdir -p ~/.config/quickshell
@@ -320,11 +302,13 @@ cd ~/.config/quickshell
 git clone https://github.com/caelestia-dots/shell.git caelestia
 ```
 
-Enter:
+Enter the directory:
 
 ```bash
 cd caelestia
 ```
+
+---
 
 Configure:
 
@@ -349,9 +333,9 @@ sudo cmake --install build
 
 ---
 
-# 8. Running Caelestia
+# 8. Launch Caelestia
 
-Start Caelestia:
+Start the shell:
 
 ```bash
 caelestia shell -d
@@ -367,15 +351,15 @@ qs -c caelestia
 
 # 9. Updating Caelestia
 
-If Caelestia releases a new version:
+When a new Caelestia release comes out:
 
-Go to your Caelestia folder:
+Go to your installation:
 
 ```bash
 cd ~/.config/quickshell/caelestia
 ```
 
-Check your branch:
+Check your git state:
 
 ```bash
 git status
@@ -384,10 +368,10 @@ git status
 If you see:
 
 ```
-HEAD detached at vX.X.X
+HEAD detached at v2.x.x
 ```
 
-you are on a release tag.
+you are currently on a release tag.
 
 Switch back to main:
 
@@ -407,7 +391,7 @@ Rebuild:
 cmake --build build
 ```
 
-Install again:
+Install:
 
 ```bash
 sudo cmake --install build
@@ -417,13 +401,13 @@ sudo cmake --install build
 
 # 10. Configuration
 
-Caelestia configuration:
+Caelestia configuration is stored in:
 
 ```
 ~/.config/caelestia/
 ```
 
-Main file:
+Main configuration file:
 
 ```
 shell.json
@@ -439,7 +423,7 @@ Example:
 
 # Troubleshooting
 
-## Qt not detected
+## Qt not found
 
 Check:
 
@@ -479,7 +463,7 @@ Example:
 
 ## Caelestia does not start
 
-Check:
+Try:
 
 ```bash
 qs -c caelestia
