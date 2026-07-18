@@ -1,8 +1,12 @@
-# Installing Caelestia Shell on Ubuntu/Linux Mint
+# Caelestia Shell Installation Guide (Ubuntu / Linux Mint)
 
-A guide for installing **Caelestia Shell** on Ubuntu-based distributions (Ubuntu, Linux Mint, etc).
+A guide for installing **Caelestia Shell** on Ubuntu-based distributions such as Ubuntu and Linux Mint.
 
-This guide is aimed at people who want Caelestia running on a normal Debian/Ubuntu system without installing the full Caelestia dots.
+This guide focuses on a manual installation using:
+- Qt 6.11.1
+- Quickshell
+- Caelestia Shell
+- Hyprland
 
 ---
 
@@ -11,7 +15,7 @@ This guide is aimed at people who want Caelestia running on a normal Debian/Ubun
 Before starting, make sure you have:
 
 - A brain 🧠
-- A computer 💻
+- A fucking computer 💻
 - Fingers
 - Hands
 - A keyboard
@@ -21,7 +25,7 @@ Software requirements:
 
 - Linux Mint / Ubuntu based system
 - Hyprland
-- Qt 6.11
+- Qt 6.11.1
 - Quickshell
 - CMake
 - Ninja
@@ -31,103 +35,155 @@ Software requirements:
 
 # 1. Install Hyprland
 
-Caelestia is designed around Hyprland.
+Caelestia Shell runs on top of Hyprland.
 
-If you do not already have Hyprland installed, follow this guide:
+If you do not already have Hyprland installed, follow:
 
 https://github.com/LinuxBeginnings/Ubuntu-Hyprland
 
-After installing Hyprland, make sure you can start a working Hyprland session before continuing.
+Make sure Hyprland launches correctly before continuing.
+
+Caelestia is only the desktop shell. It is not a window manager.
 
 ---
 
-# 2. Install Qt 6.11
+# 2. Install Qt 6.11.1
 
 ## Create a Qt account
 
 You need a Qt account to download the official installer.
 
-Go to the Qt website:
+Go to:
 
 https://www.qt.io/download
 
 Download the Linux installer.
 
-Run the installer:
+Run:
 
 ```bash
 chmod +x qt-online-installer-linux-x64-*.run
+
 ./qt-online-installer-linux-x64-*.run
 ```
 
-Sign into your Qt account.
-
-Continue until you reach the installation options.
+Sign in with your Qt account and continue.
 
 ---
 
-## Qt Installer options
+## Qt Installer Setup
 
-Choose:
+When asked for the installation type select:
 
 ```
 Custom installation
 ```
 
-Select:
+![Qt Installer Step 4](guide-4.png)
+
+---
+
+Expand:
 
 ```
 Qt for development
 ```
 
-Expand it.
+![Qt Installer Step 5](guide-5.png)
+
+Then expand:
+
+```
+Qt
+```
+
+---
+
+Expand:
+
+```
+Qt 6.11.1
+```
+
+Inside Qt 6.11.1 select:
+
+```
+Desktop
+```
+
+Only select the desktop component.
+
+Do not select unnecessary platforms.
+
+![Qt Installer Step 6](guide-6.png)
+
+---
+
+Expand:
+
+```
+Additional libraries
+```
+
+under Qt 6.11.1.
+
+![Qt Installer Step 7](guide-7.png)
+
+---
+
+Scroll down until you find:
+
+```
+Qt Wayland
+```
 
 Select:
 
 ```
-Qt 6.11
+Qt Wayland
 ```
 
-Expand Qt 6.11.
+This is required for Wayland applications.
 
-Only install the required components.
-
-Disable:
-
-```
-❌ Additional libraries
-❌ Build Tools
-```
-
-Enable:
-
-```
-✅ Qt Wayland
-```
-
-Your installer should look similar to the following:
-
-![Qt Installer 4](guide-4.png)
-
-![Qt Installer 5](guide-5.png)
-
-![Qt Installer 6](guide-6.png)
-
-![Qt Installer 7](guide-7.png)
-
-![Qt Installer 8](guide-8.png)
-
-![Qt Installer 9](guide-9.png)
-
-![Qt Installer 10](guide-10.png)
-
-Finish the installation.
+![Qt Installer Step 8](guide-8.png)
 
 ---
 
-# 3. Install dependencies
+Do not install:
 
-Install required build tools:
+```
+Build Tools
+```
+
+They are not required.
+
+We will use:
+
+- GCC
+- CMake
+- Ninja
+
+from the system.
+
+---
+
+Accept the Qt license agreement.
+
+![Qt Installer Step 9](guide-9.png)
+
+---
+
+Before installing, make sure your selected components look like this:
+
+![Qt Installer Step 10](guide-10.png)
+
+Continue the installation.
+
+---
+
+# 3. Install System Dependencies
+
+Install required tools:
 
 ```bash
 sudo apt update
@@ -147,9 +203,9 @@ libwayland-dev
 
 # 4. Install Quickshell
 
-## Option 1 (Recommended)
+## Recommended method
 
-Quickshell is available from the DankLinux packages.
+Quickshell is available from the DankLinux repository.
 
 Add the repository:
 
@@ -159,13 +215,13 @@ sudo add-apt-repository ppa:avengemedia/danklinux
 sudo apt update
 ```
 
-Install the latest release:
+Install the stable version:
 
 ```bash
 sudo apt install quickshell
 ```
 
-or install the git version:
+or install the latest git version:
 
 ```bash
 sudo apt install quickshell-git
@@ -173,36 +229,9 @@ sudo apt install quickshell-git
 
 ---
 
-## Option 2: Build Quickshell manually
+# 5. Install Caelestia Dependencies
 
-Only do this if packages do not work.
-
-Clone:
-
-```bash
-git clone https://github.com/quickshell-mirror/quickshell.git
-cd quickshell
-```
-
-Build:
-
-```bash
-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
-
-cmake --build build
-```
-
-Install:
-
-```bash
-sudo cmake --install build
-```
-
----
-
-# 5. Install Caelestia dependencies
-
-Install:
+Install required libraries:
 
 ```bash
 sudo apt install \
@@ -220,11 +249,11 @@ swappy
 
 ---
 
-# 6. Install cpptrace
+# 6. cpptrace
 
-Caelestia uses cpptrace for debugging.
+Caelestia can use cpptrace for debugging.
 
-Install:
+Install cpptrace:
 
 ```bash
 git clone https://github.com/jeremy-rifkin/cpptrace.git
@@ -238,20 +267,27 @@ cmake --build build
 sudo cmake --install build
 ```
 
+Return:
+
+```bash
+cd ..
+```
+
 ---
 
 ## Skipping cpptrace
 
-If you do not want cpptrace, you can remove the dependency.
+If you do not want cpptrace, you can try building without it.
 
 Clone Caelestia:
 
 ```bash
 git clone https://github.com/caelestia-dots/shell.git
+
 cd shell
 ```
 
-Configure without optional features:
+Configure:
 
 ```bash
 cmake -B build \
@@ -259,7 +295,7 @@ cmake -B build \
 -DCMAKE_BUILD_TYPE=Release
 ```
 
-Then build:
+Build:
 
 ```bash
 cmake --build build
@@ -269,23 +305,27 @@ cmake --build build
 
 # 7. Install Caelestia Shell
 
-Clone the repository:
+Create the Quickshell directory:
 
 ```bash
 mkdir -p ~/.config/quickshell
+```
 
+Clone Caelestia:
+
+```bash
 cd ~/.config/quickshell
 
 git clone https://github.com/caelestia-dots/shell.git caelestia
 ```
 
-Enter the folder:
+Enter:
 
 ```bash
 cd caelestia
 ```
 
-Build:
+Configure:
 
 ```bash
 cmake -B build \
@@ -294,7 +334,7 @@ cmake -B build \
 -DCMAKE_INSTALL_PREFIX=/
 ```
 
-Compile:
+Build:
 
 ```bash
 cmake --build build
@@ -308,9 +348,9 @@ sudo cmake --install build
 
 ---
 
-# 8. Starting Caelestia
+# 8. Running Caelestia
 
-Run:
+Start Caelestia:
 
 ```bash
 caelestia shell -d
@@ -326,9 +366,9 @@ qs -c caelestia
 
 # 9. Updating Caelestia
 
-When a new Caelestia release comes out:
+If Caelestia releases a new version:
 
-Go to your installation:
+Go to your Caelestia folder:
 
 ```bash
 cd ~/.config/quickshell/caelestia
@@ -340,15 +380,15 @@ Check your branch:
 git status
 ```
 
-If you are on a release tag:
-
-Example:
+If you see:
 
 ```
-HEAD detached at v2.2.0
+HEAD detached at vX.X.X
 ```
 
-switch back to main:
+you are on a release tag.
+
+Switch back to main:
 
 ```bash
 git checkout main
@@ -366,7 +406,7 @@ Rebuild:
 cmake --build build
 ```
 
-Install:
+Install again:
 
 ```bash
 sudo cmake --install build
@@ -376,13 +416,13 @@ sudo cmake --install build
 
 # 10. Configuration
 
-Caelestia configuration is stored here:
+Caelestia configuration:
 
 ```
 ~/.config/caelestia/
 ```
 
-Main configuration:
+Main file:
 
 ```
 shell.json
@@ -398,7 +438,7 @@ Example:
 
 # Troubleshooting
 
-## Qt not found
+## Qt not detected
 
 Check:
 
@@ -406,13 +446,13 @@ Check:
 echo $CMAKE_PREFIX_PATH
 ```
 
+It should point to:
+
+```
+~/Qt/6.11.1/gcc_64
+```
+
 Example:
-
-```
-/home/user/Qt/6.11.1/gcc_64
-```
-
-If missing:
 
 ```bash
 export CMAKE_PREFIX_PATH=$HOME/Qt/6.11.1/gcc_64
@@ -420,7 +460,7 @@ export CMAKE_PREFIX_PATH=$HOME/Qt/6.11.1/gcc_64
 
 ---
 
-## QML modules missing
+## Missing QML modules
 
 Check:
 
@@ -436,11 +476,15 @@ Example:
 
 ---
 
-## Hyprland does not start
+## Caelestia does not start
 
-Make sure Hyprland works before launching Caelestia.
+Check:
 
-Caelestia is a shell, not a window manager.
+```bash
+qs -c caelestia
+```
+
+Look for missing QML modules or libraries.
 
 ---
 
@@ -455,5 +499,5 @@ https://quickshell.outfoxxed.me
 Hyprland:
 https://hyprland.org
 
-Ubuntu Hyprland guide:
+Ubuntu Hyprland Guide:
 https://github.com/LinuxBeginnings/Ubuntu-Hyprland
