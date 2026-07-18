@@ -2,6 +2,13 @@
 
 A guide for installing **Caelestia Shell** on Ubuntu-based distributions such as Ubuntu and Linux Mint.
 
+
+## Preview 
+
+(preview-1.png)
+(preview-2.png
+
+
 This guide focuses on a manual installation using:
 - Qt 6.11.1
 - Quickshell
@@ -35,7 +42,7 @@ This guide focuses on a manual installation using:
 Before starting, make sure you have:
 
 - A brain 🧠
-- A fucking computer 💻
+- A computer 💻
 - Fingers
 - Hands
 - A keyboard
