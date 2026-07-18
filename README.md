@@ -1,488 +1,514 @@
 # Caelestia Shell on Ubuntu / Linux Mint
 
-A guide for installing **Caelestia Shell** on Ubuntu-based distributions (Ubuntu, Linux Mint, etc).
+A guide to installing Caelestia Shell on Ubuntu-based systems
+(Ubuntu / Linux Mint) using Hyprland.
 
-This guide installs:
+This guide covers:
 
+- Hyprland setup
+- Qt 6.11.1 installation
+- Qt Wayland
+- Quickshell installation
+- Caelestia Shell compilation
+- cpptrace information
+- Environment variables
+- Hyprland Lua integration
+
+
+==================================================
+REQUIREMENTS
+==================================================
+
+Before starting:
+
+- A brain
+- A computer
+- Fingers
+- Hands
+- Keyboard
+- Patience
+
+
+Software requirements:
+
+- Ubuntu / Linux Mint
 - Hyprland
 - Qt 6.11.1
 - Quickshell
 - Caelestia Shell
 
----
 
-# Requirements
-
-Before starting, make sure you have:
-
-- A brain 🧠
-- A fucking computer 💻
-- Fingers
-- Hands
-- A keyboard
-- Patience
-
-Software requirements:
-
-- Ubuntu / Linux Mint based system
-- Hyprland
-- Qt 6.11.1
-- Quickshell
-- CMake
-- Ninja
-- Git
-
----
-
-# 1. Install Hyprland
-
-Caelestia Shell is designed to run on top of Hyprland.
-
-If you do not already have Hyprland installed, follow:
+Install Hyprland first:
 
 https://github.com/LinuxBeginnings/Ubuntu-Hyprland
 
-Make sure Hyprland starts correctly before continuing.
 
-Caelestia is only a desktop shell.
-It is not a window manager.
+Make sure Hyprland is working before continuing.
 
----
 
-# 2. Install Qt 6.11.1
+==================================================
+1. INSTALL BUILD DEPENDENCIES
+==================================================
 
-## Create a Qt account
 
-You need a Qt account to download the official installer.
+Open a terminal:
 
-Go to:
-
-https://www.qt.io/development/download-qt-installer-oss
-
-Download the Linux installer.
-
-Run:
-
-```bash
-chmod +x qt-online-installer-linux-x64-*.run
-
-./qt-online-installer-linux-x64-*.run
-```
-
-Sign into your Qt account and continue.
-
----
-
-## Qt Installer Setup
-
-Select:
-
-```
-Custom installation
-```
-
-![Qt Installer Step 4](guide-4.png)
-
----
-
-Expand:
-
-```
-Qt for development
-```
-
-![Qt Installer Step 5](guide-5.png)
-
-Then expand:
-
-```
-Qt
-```
-
----
-
-Expand:
-
-```
-Qt 6.11.1
-```
-
-Select only:
-
-```
-Desktop
-```
-
-Do not select extra platforms.
-
-![Qt Installer Step 6](guide-6.png)
-
----
-
-Expand:
-
-```
-Additional libraries
-```
-
-under Qt 6.11.1.
-
-![Qt Installer Step 7](guide-7.png)
-
----
-
-Scroll down and find:
-
-```
-Qt Wayland
-```
-
-Enable:
-
-```
-Qt Wayland
-```
-
-This is required for Wayland applications.
-
-![Qt Installer Step 8](guide-8.png)
-
----
-
-Do not install:
-
-```
-Build Tools
-```
-
-They are not required.
-
-We will use:
-
-- GCC
-- CMake
-- Ninja
-
-from the system.
-
----
-
-Accept the license agreement.
-
-![Qt Installer Step 9](guide-9.png)
-
----
-
-Before installing, check that your selection looks like this:
-
-![Qt Installer Step 10](guide-10.png)
-
-Continue with installation.
-
----
-
-# 3. Install Build Tools
-
-Install the required build packages:
-
-```bash
 sudo apt update
+
+
+Install required packages:
 
 sudo apt install \
 git \
 cmake \
 ninja-build \
-build-essential
-```
+build-essential \
+pkg-config \
+curl \
+wget
 
----
 
-# 4. Install Quickshell
+Install Caelestia dependencies:
 
-Quickshell is required by Caelestia.
-
-The easiest method on Ubuntu/Linux Mint is using the DankLinux packages.
-
-Add the repository:
-
-```bash
-sudo add-apt-repository ppa:avengemedia/danklinux
-
-sudo apt update
-```
-
-Install the stable release:
-
-```bash
-sudo apt install quickshell
-```
-
-or install the git version:
-
-```bash
-sudo apt install quickshell-git
-```
-
----
-
-# 5. Install Caelestia Runtime Dependencies
-
-Install optional features used by Caelestia:
-
-```bash
 sudo apt install \
 ddcutil \
 brightnessctl \
+libcava-dev \
 network-manager \
 lm-sensors \
 fish \
+aubio-tools \
 libpipewire-0.3-dev \
+qt6-declarative-dev \
+qt6-base-dev \
 libqalculate-dev \
 swappy
-```
 
-These provide:
 
-| Package | Feature |
-|-|-|
-| ddcutil | Monitor brightness control |
-| brightnessctl | Laptop brightness |
-| network-manager | Network widget |
-| lm-sensors | Hardware monitoring |
-| fish | Shell utilities |
-| PipeWire | Audio visualiser |
-| libqalculate | Calculator |
-| swappy | Screenshot editing |
+Install fonts:
 
----
 
-# 6. cpptrace (Optional)
+https://github.com/google/material-design-icons/tree/master/variablefont
 
-Caelestia can use cpptrace for debugging.
 
-Most users can skip this.
 
-Only install it if CMake complains about missing cpptrace.
+==================================================
+2. INSTALL QT 6.11.1
+==================================================
 
-Build cpptrace:
 
-```bash
-git clone https://github.com/jeremy-rifkin/cpptrace.git
+Download the Qt installer:
 
-cd cpptrace
+https://www.qt.io/development/download-qt-installer-oss
 
-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
-cmake --build build
+Create a Qt account.
 
-sudo cmake --install build
-```
+Download the Linux installer.
 
-Return:
+Run:
 
-```bash
-cd ..
-```
+chmod +x qt-installer.run
 
----
+./qt-installer.run
 
-# 7. Install Caelestia Shell
 
-Create the Quickshell folder:
+Login with your Qt account.
 
-```bash
+
+--------------------------------------------------
+QT INSTALLATION OPTIONS
+--------------------------------------------------
+
+
+Guide 4:
+
+Select:
+
+Custom installation
+
+
+Guide 5:
+
+Expand:
+
+Qt for development
+
+then expand:
+
+Qt
+
+
+Guide 6:
+
+Expand:
+
+Qt 6.11.1
+
+
+Select only:
+
+Desktop
+
+
+Do not select unnecessary components.
+
+
+Guide 7:
+
+Expand:
+
+Additional Libraries
+
+
+Guide 8:
+
+Scroll down and find:
+
+Qt Wayland
+
+
+Enable:
+
+Qt Wayland
+
+
+Do NOT select:
+
+Build Tools
+
+
+Build tools are not required because we use
+system packages.
+
+
+Guide 9:
+
+Accept the license agreement.
+
+
+Guide 10:
+
+Your installation should match the final screenshot.
+
+
+
+==================================================
+3. INSTALL QUICKSHELL
+==================================================
+
+
+Quickshell does not need to be built manually anymore.
+
+Use the AvengeMedia DankLinux repository.
+
+
+Add repository:
+
+sudo add-apt-repository ppa:avengemedia/danklinux
+
+sudo apt update
+
+
+Install stable Quickshell:
+
+sudo apt install quickshell
+
+
+For the latest development version:
+
+sudo apt install quickshell-git
+
+
+Check:
+
+qs --version
+
+
+
+==================================================
+4. INSTALL CAELESTIA SHELL
+==================================================
+
+
+Create Quickshell directory:
+
 mkdir -p ~/.config/quickshell
-```
+
 
 Clone Caelestia:
 
-```bash
 cd ~/.config/quickshell
 
 git clone https://github.com/caelestia-dots/shell.git caelestia
-```
 
-Enter the directory:
 
-```bash
+Enter folder:
+
 cd caelestia
-```
 
----
 
-Configure:
+Configure build:
 
-```bash
 cmake -B build \
 -G Ninja \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_INSTALL_PREFIX=/
-```
 
-Build:
 
-```bash
+Compile:
+
 cmake --build build
-```
+
 
 Install:
 
-```bash
 sudo cmake --install build
-```
 
----
 
-# 8. Launch Caelestia
 
-Start the shell:
+==================================================
+5. CPPTRACE INFORMATION
+==================================================
 
-```bash
+
+Caelestia uses cpptrace for its beat detection
+library.
+
+Recommended:
+
+Install cpptrace and build normally.
+
+
+If you do not want beat detection:
+
+You can skip cpptrace.
+
+The shell will still work.
+
+Only affected features:
+
+- Audio visualiser reactions
+- Beat detection effects
+
+
+
+==================================================
+6. QT ENVIRONMENT VARIABLES
+==================================================
+
+
+Open:
+
+nano ~/.bashrc
+
+
+Add:
+
+
+export Qt6_DIR=$HOME/Qt/6.11.1/gcc_64/lib/cmake/Qt6
+
+export CMAKE_PREFIX_PATH=$HOME/Qt/6.11.1/gcc_64
+
+export LD_LIBRARY_PATH=$HOME/Qt/6.11.1/gcc_64/lib
+
+export QML_IMPORT_PATH=$HOME/.local/lib/qt6/qml:/usr/lib/qt6/qml
+
+export QML2_IMPORT_PATH=$HOME/.local/lib/qt6/qml:/usr/lib/qt6/qml
+
+
+Reload:
+
+source ~/.bashrc
+
+
+
+==================================================
+7. TEST CAELESTIA
+==================================================
+
+
+Run:
+
 caelestia shell -d
-```
+
 
 or:
 
-```bash
+
 qs -c caelestia
-```
 
----
 
-# 9. Updating Caelestia
 
-When a new Caelestia release comes out:
+==================================================
+8. START CAELESTIA WITH HYPRLAND LUA
+==================================================
 
-Go to your installation:
 
-```bash
+Open:
+
+nano ~/.config/hypr/hyprland.lua
+
+
+Add:
+
+
+hl.on("hyprland.start", function()
+
+    hl.exec_cmd(
+        "bash -c 'source ~/.bashrc && sleep 2 && caelestia shell -d'"
+    )
+
+end)
+
+
+
+==================================================
+9. CAELESTIA LUA KEYBINDS
+==================================================
+
+
+Add to your Hyprland Lua configuration:
+
+
+local function cael_bind(key,target,func)
+
+    hl.bind(
+        key,
+        hl.dsp.exec_cmd(
+        "quickshell ipc -c caelestia call "
+        .. target .. " " .. func
+        )
+    )
+
+end
+
+
+-- Launcher
+
+cael_bind(
+"SUPER + A",
+"drawers",
+"toggle launcher"
+)
+
+
+-- Dashboard
+
+cael_bind(
+"SUPER + D",
+"drawers",
+"toggle dashboard"
+)
+
+
+-- Sidebar
+
+cael_bind(
+"SUPER + B",
+"drawers",
+"toggle sidebar"
+)
+
+
+-- Utilities
+
+cael_bind(
+"SUPER + U",
+"drawers",
+"toggle utilities"
+)
+
+
+-- Settings
+
+cael_bind(
+"SUPER + S",
+"nexus",
+"open"
+)
+
+
+-- Lock
+
+cael_bind(
+"SUPER + L",
+"lock",
+"lock"
+)
+
+
+-- Clear notifications
+
+cael_bind(
+"SUPER + SHIFT + N",
+"notifs",
+"clear"
+)
+
+
+-- Media
+
+cael_bind(
+"XF86AudioPlay",
+"mpris",
+"playPause"
+)
+
+cael_bind(
+"XF86AudioNext",
+"mpris",
+"next"
+)
+
+cael_bind(
+"XF86AudioPrev",
+"mpris",
+"previous"
+)
+
+
+
+==================================================
+10. UPDATING CAELESTIA
+==================================================
+
+
+Go to your Caelestia folder:
+
+
 cd ~/.config/quickshell/caelestia
-```
 
-Check your git state:
-
-```bash
-git status
-```
-
-If you see:
-
-```
-HEAD detached at v2.x.x
-```
-
-you are currently on a release tag.
-
-Switch back to main:
-
-```bash
-git checkout main
-```
 
 Update:
 
-```bash
 git pull
-```
+
 
 Rebuild:
 
-```bash
 cmake --build build
-```
+
 
 Install:
 
-```bash
 sudo cmake --install build
-```
 
----
 
-# 10. Configuration
 
-Caelestia configuration is stored in:
+==================================================
+DONE
+==================================================
 
-```
-~/.config/caelestia/
-```
 
-Main configuration file:
+You now have:
 
-```
-shell.json
-```
+✓ Hyprland
+✓ Qt 6.11.1
+✓ Qt Wayland
+✓ Quickshell
+✓ Caelestia Shell
+✓ Lua keybind integration
 
-Example:
 
-```
-~/.config/caelestia/shell.json
-```
-
----
-
-# Troubleshooting
-
-## Qt not found
-
-Check:
-
-```bash
-echo $CMAKE_PREFIX_PATH
-```
-
-It should point to:
-
-```
-~/Qt/6.11.1/gcc_64
-```
-
-Example:
-
-```bash
-export CMAKE_PREFIX_PATH=$HOME/Qt/6.11.1/gcc_64
-```
-
----
-
-## Missing QML modules
-
-Check:
-
-```bash
-echo $QML_IMPORT_PATH
-```
-
-Example:
-
-```
-/usr/lib/qt6/qml
-```
-
----
-
-## Caelestia does not start
-
-Try:
-
-```bash
-qs -c caelestia
-```
-
-Look for missing QML modules or libraries.
-
----
-
-# Credits
-
-Caelestia Shell:
-https://github.com/caelestia-dots/shell
-
-Quickshell:
-https://quickshell.outfoxxed.me
-
-Hyprland:
-https://hyprland.org
-
-Ubuntu Hyprland Guide:
-https://github.com/LinuxBeginnings/Ubuntu-Hyprland
+Enjoy your Caelestia desktop.
