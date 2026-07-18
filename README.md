@@ -6,7 +6,7 @@ A guide for installing **Caelestia Shell** on Ubuntu-based distributions such as
 # Preview 
 
 ![preview](preview-1.png)
-![preview](preview-2.png
+![preview](preview-2.png)
 
 
 This guide focuses on a manual installation using:
